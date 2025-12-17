@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trimbridge High School - Student Grade Calculator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+    <style>
+        body {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Staples_High_School%2C_Westport%2C_CT.jpg/500px-Staples_High_School%2C_Westport%2C_CT.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 60px; /* Added for fixed navbar */
+        }
+        .navbar {
+            background-color: rgba(28, 39, 255, 0.845);
+            padding: 15px 0;
+        }
+        .navbar-brand, .nav-link {
+            color: white !important;
+            font-weight: bold;
+        }
+        .navbar-brand {
+            font-size: 1.5rem;
+        }
+        .nav-link:hover {
+            color: rgb(0, 0, 0) !important;
+        }
+        .main-container {
+            max-width: 600px;
+            margin: 30px auto 50px auto; /* centers horizontally */
+            background-color: rgb(79, 88, 254);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.681);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        h2 {
+            margin-top: 20px;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        .form-control {
+            margin-bottom: 15px;
+            border: 1px solid;
+        }
+        .form-control:focus {
+            border-color: rgb(0, 217, 255);
+            box-shadow: 0 0 0 0.25rem rgb(0, 217, 255);
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .btn-primary:hover {
+            background-color: rgb(48, 25, 192);
+            border-color: rgb(0, 0, 0);
+        }
+        #student_info {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: rgb(0,0,0);
+            margin-top: 30px;
+            padding: 15px;
+            background-color: rgb(255, 255, 255);
+            border-left: 5px solid rgb(255, 255, 255);
+            border-radius: 5px;
+        }
+        #summary {
+            background-color: rgb(255, 255, 255);
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #000000;
+            font-family: monospace;
+        }
+        #output {
+            font-size: 1.3rem;
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 5px;
+        }
+        .input-group-text {
+            background-color: rgba(5, 118, 179, 0.675);
+            color: rgb(0, 0, 0);
+            border: 1px solid rgb(0, 0, 0);
+            min-width: 80px; 
+        }
+        .grades-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .grade-input-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Trimbridge High School</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="grade_calculator.html">Grade Calculator</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="clubs.html">Clubs</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <h1>Student Grade Calculator</h1>
+        
+        <div class="mb-3">
+            <div class="input-group">
+                <span class="input-group-text">First Name</span>
+                <input type="text" class="form-control" id="first_name" >
+            </div><br>
+            
+            <div class="input-group">
+                <span class="input-group-text">Last Name</span>
+                <input type="text" class="form-control" id="last_name" >
+            </div>
+        </div>
+
+        <h2>Enter your grades:</h2>
+        
+        <div class="grades-container">
+            <div class="grade-input-group">
+                <div class="input-group">
+                    <span class="input-group-text">Science</span>
+                    <input type="number" class="form-control" id="science" placeholder="Grade" min="0" max="100" step="0.01">
+                </div>
+            </div>
+            
+            <div class="grade-input-group">
+                <div class="input-group">
+                    <span class="input-group-text">Math</span>
+                    <input type="number" class="form-control" id="math" placeholder="Grade" min="0" max="100" step="0.01">
+                </div>
+            </div>
+            
+            <div class="grade-input-group">
+                <div class="input-group">
+                    <span class="input-group-text">English</span>
+                    <input type="number" class="form-control" id="english" placeholder="Grade" min="0" max="100" step="0.01">
+                </div>
+            </div>
+            
+            <div class="grade-input-group">
+                <div class="input-group">
+                    <span class="input-group-text">Filipino</span>
+                    <input type="number" class="form-control" id="filipino" placeholder="Grade" min="0" max="100" step="0.01">
+                </div>
+            </div>
+            
+            <div class="grade-input-group">
+                <div class="input-group">
+                    <span class="input-group-text">ICT</span>
+                    <input type="number" class="form-control" id="ict" placeholder="Grade" min="0" max="100" step="0.01">
+                </div>
+            </div>
+            
+            <div class="grade-input-group">
+                <div class="input-group">
+                    <span class="input-group-text">PE</span>
+                    <input type="number" class="form-control" id="pe" placeholder="Grade" min="0" max="100" step="0.01">
+                </div>
+            </div>
+        </div>
+        
+        <!-- change to button to prevent accidental form submission -->
+        <button class="btn btn-primary" type="button" py-click="general_weighted_average">Calculate GWA</button>
+        
+        <div id="student_info"></div>
+        <pre id="summary"></pre>
+        <div id="output"></div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="py" src="main.py"></script>
+</body>
+</html>
